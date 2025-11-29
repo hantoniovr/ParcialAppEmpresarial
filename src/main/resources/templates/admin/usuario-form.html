@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuario</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Administración · Usuarios</div>
+    <h2 th:text="${#strings.isEmpty(usuario.id) ? 'Nuevo usuario' : 'Editar usuario'}" class="admin-title"></h2>
+
+    <div class="box">
+
+        <form th:if="${#strings.isEmpty(usuario.id)}"
+              th:action="@{/admin/usuarios}"
+              method="post"
+              th:object="${usuario}">
+
+            <div class="form-2col">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input th:field="*{nombre}">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input th:field="*{apellido}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="number" th:field="*{edad}">
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" th:field="*{correo}">
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de usuario</label>
+                <select th:field="*{tipoUsuario}">
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option th:each="e : ${estados}" th:value="${e}" th:text="${e}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Validación</label>
+                <select th:field="*{validacion}">
+                    <option th:each="v : ${validaciones}" th:value="${v}" th:text="${v}"></option>
+                </select>
+            </div>
+
+            <div class="form-2col">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input th:field="*{username}">
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" th:field="*{passwordHash}">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/admin/usuarios}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+
+        </form>
+
+        <form th:unless="${#strings.isEmpty(usuario.id)}"
+              th:action="@{/admin/usuarios/{id}(id=${usuario.id})}"
+              method="post"
+              th:object="${usuario}">
+
+            <div class="form-2col">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input th:field="*{nombre}">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input th:field="*{apellido}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="number" th:field="*{edad}">
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" th:field="*{correo}">
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de usuario</label>
+                <select th:field="*{tipoUsuario}">
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option th:each="e : ${estados}" th:value="${e}" th:text="${e}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Validación</label>
+                <select th:field="*{validacion}">
+                    <option th:each="v : ${validaciones}" th:value="${v}" th:text="${v}"></option>
+                </select>
+            </div>
+
+            <div class="form-2col">
+                <div class="form-group">
+                    <label>Usuario</label>
+                    <input th:field="*{username}">
+                </div>
+
+                <div class="form-group">
+                    <label>Nueva contraseña (opcional)</label>
+                    <input type="password" name="nuevaPassword">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/admin/usuarios}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Actualizar</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

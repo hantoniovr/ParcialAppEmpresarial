@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>STAI</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-header">
+        <div>
+            <div class="admin-breadcrumb">Administración · STAI</div>
+            <h2 class="admin-title">STAI</h2>
+            <p class="admin-subtitle">Accede a la gestión del cuestionario STAI y sus configuraciones.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/admin}" class="btn">Volver</a>
+        </div>
+    </div>
+
+    <div class="admin-grid">
+
+        <div class="admin-card">
+            <div>
+                <h3>Gestionar preguntas</h3>
+                <p>Modifica el texto, orden, estado e inversión de cada ítem del test.</p>
+            </div>
+            <div>
+                <a th:href="@{/admin/stai/preguntas}" class="btn btn-success">Ir a preguntas STAI</a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div>
+                <h3>Probar test</h3>
+                <p>Ejecuta el cuestionario tal y como lo vería un usuario normal.</p>
+            </div>
+            <div>
+                <a th:href="@{/test/stai}" class="btn">Abrir test STAI</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

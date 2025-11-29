@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes de estado</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Moderador · Solicitudes</div>
+
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Solicitudes de cambio de estado</h2>
+            <p class="admin-subtitle">
+                Revisa y atiende las solicitudes enviadas por los profesionales.
+            </p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/moderador/profesionales}" class="btn">Volver a profesionales</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <table>
+            <thead>
+            <tr>
+                <th>Profesional</th>
+                <th>Estado actual</th>
+                <th>Estado solicitado</th>
+                <th>Fecha</th>
+                <th>Respuesta</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${solicitudes}">
+                <!-- nombre completo -->
+                <td th:text="${nombresProfesionales[s.id]}"></td>
+
+                <td th:text="${s.estadoActual}"></td>
+                <td th:text="${s.estadoSolicitado}"></td>
+
+                <td th:text="${#temporals.format(s.fecha, 'yyyy-MM-dd HH:mm')}"></td>
+
+                <td th:text="${s.respuesta != null ? s.respuesta : 'PENDIENTE'}"></td>
+
+                <td>
+                    <form th:action="@{/moderador/solicitudes/{id}/aprobar(id=${s.id})}"
+                          method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Aprobar</button>
+                    </form>
+
+                    <form th:action="@{/moderador/solicitudes/{id}/rechazar(id=${s.id})}"
+                          method="post" style="display:inline; margin-left:6px;">
+                        <button type="submit" class="btn btn-danger btn-sm">Rechazar</button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(solicitudes)}">
+                <td colspan="6">No hay solicitudes pendientes.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

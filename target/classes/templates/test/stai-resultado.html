@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado STAI</title>
+
+    <!-- Tu CSS global -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .result-box {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #24242a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        }
+
+        .result-title {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .result-sub {
+            color: #b0b0b7;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .result-item {
+            font-size: 18px;
+            margin: 14px 0;
+            color: #eaeaea;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-item strong {
+            color: #ffffff;
+        }
+
+        .result-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .result-nav {
+            margin-top: 25px;
+        }
+
+        .result-nav a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Usuario · Resultado STAI</div>
+
+    <div class="result-box">
+
+        <h2 class="result-title">Resultado del Test STAI</h2>
+        <p class="result-sub">Aquí están tus puntajes obtenidos:</p>
+
+        <p class="result-item">
+            <!-- Icono de corazón / estado -->
+            <svg class="result-icon" viewBox="0 0 24 24" fill="#6f86ff">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                    2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09
+                    C13.09 3.81 14.76 3 16.5 3
+                    19.58 3 22 5.42 22 8.5
+                    c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <strong>Puntaje Estado:</strong>
+            <span th:text="${r.puntajeEstado}"></span>
+        </p>
+
+        <p class="result-item">
+            <!-- Icono de rasgo -->
+            <svg class="result-icon" viewBox="0 0 24 24" fill="#6f86ff">
+                <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13
+                    c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5
+                    s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+            </svg>
+            <strong>Puntaje Rasgo:</strong>
+            <span th:text="${r.puntajeRasgo}"></span>
+        </p>
+
+        <div class="result-nav">
+            <a th:href="@{/me}" class="btn" style="width:90%; text-align:center;">
+                ← Volver a mi panel
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Miembros · Evaluador</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div style="display:flex;justify-content:flex-end;margin-bottom:15px;gap:12px;">
+    <a th:href="@{/logout}" class="btn btn-danger" style="display:flex;align-items:center;gap:6px;">
+        <svg fill="#ffffff" viewBox="0 0 24 24" width="18" height="18">
+            <path d="M10 17l5-5-5-5v10zm9-12h-8V3h8c1.1 0 2 .9 
+                     2 2v14a2 2 0 01-2 2h-8v-2h8V5z"/>
+        </svg>
+        Cerrar sesión
+    </a>
+</div>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Evaluador · Miembros</div>
+
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Miembros registrados</h2>
+            <p class="admin-subtitle">Selecciona un miembro para ver el historial de sus evaluaciones STAI.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/evaluador/solicitudes}" class="btn">Ver solicitudes</a>
+        </div>
+    </div>
+
+    <table style="margin-top:20px;">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Usuario</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="m : ${miembros}">
+            <td th:text="${m.nombre + ' ' + m.apellido}"></td>
+            <td th:text="${m.correo}"></td>
+            <td th:text="${m.username}"></td>
+            <td th:text="${m.tipoUsuario}"></td>
+            <td th:text="${m.estado}"></td>
+            <td>
+                <a th:href="@{/evaluador/miembros/{id}/stai(id=${m.id})}" class="btn btn-sm">Historial</a>
+            </td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(miembros)}">
+            <td colspan="6">No hay usuarios de tipo MIEMBRO registrados.</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

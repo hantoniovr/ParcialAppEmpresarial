@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Test STAI</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        .test-box {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #24242a;
+            padding: 25px 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        }
+
+        .test-title {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 0 5px 0;
+        }
+
+        .test-subtitle {
+            color: #b0b0b7;
+            font-size: 14px;
+            margin: 4px 0 20px 0;
+        }
+
+        .test-error {
+            color: #ff7777;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .pregunta-block {
+            margin-bottom: 18px;
+        }
+
+        .pregunta-text {
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .emoji-display {
+            font-size: 22px;
+            margin-left: 10px;
+        }
+
+        .escala-opciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .escala-opciones label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .escala-opciones input[type="radio"] {
+            accent-color: #4a68ff;
+        }
+
+        .test-separator {
+            border: none;
+            border-bottom: 1px solid #333;
+            margin: 12px 0;
+        }
+
+        .test-submit button {
+            width: 100%;
+        }
+
+        .test-nav {
+            margin-top: 18px;
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+        }
+
+        .test-nav a {
+            color: #6f86ff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Usuario · Test STAI</div>
+
+    <div class="test-box">
+
+        <h2 class="test-title">Test STAI</h2>
+        <p class="test-subtitle">
+            A continuación encontrarás afirmaciones sobre cómo te sientes.
+            Responde según la escala indicada para cada pregunta.
+        </p>
+
+        <p th:if="${error}" th:text="${error}" class="test-error"></p>
+
+        <form th:action="@{/test/stai}" method="post">
+
+            <div th:each="p : ${preguntas}" class="pregunta-block">
+
+                <div>
+                    <strong class="pregunta-text"
+                            th:text="${p.orden} + '. ' + ${p.texto}"></strong>
+
+                    <span class="emoji-display"
+                          th:id="'emoji_' + ${p.id}"></span>
+                </div>
+
+                <input type="hidden" name="preguntaId" th:value="${p.id}"/>
+
+                <div th:if="${p.dimension.name() == 'ESTADO'}"
+                     class="escala-opciones">
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="1">
+                        Nada
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="2">
+                        Algo
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="3">
+                        Bastante
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="4">
+                        Mucho
+                    </label>
+
+                </div>
+
+                <div th:if="${p.dimension.name() == 'RASGO'}"
+                     class="escala-opciones">
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="1">
+                        Casi nunca
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="2">
+                        A veces
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="3">
+                        A menudo
+                    </label>
+
+                    <label>
+                        <input type="radio"
+                               th:name="${'valor_' + p.id}"
+                               value="4">
+                        Casi siempre
+                    </label>
+
+                </div>
+
+                <hr class="test-separator"/>
+            </div>
+
+            <div class="test-submit">
+                <button type="submit" class="btn">Enviar respuestas</button>
+            </div>
+        </form>
+
+        <div class="test-nav">
+            <a th:href="@{/me}">
+                ← Volver a mi panel
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const emojis = {
+        1: "😄",
+        2: "🙂",
+        3: "😐",
+        4: "😟"
+    };
+
+    document.addEventListener("change", function (e) {
+        if (e.target.type === "radio") {
+
+            const name = e.target.name;
+            const id = name.split("_")[1];
+            const value = e.target.value;
+
+            localStorage.setItem(name, value);
+
+            const span = document.getElementById("emoji_" + id);
+            if (span) span.textContent = emojis[value] || "";
+        }
+    });
+
+    window.addEventListener("DOMContentLoaded", function () {
+
+        document.querySelectorAll("input[type='radio']").forEach(radio => {
+
+            const saved = localStorage.getItem(radio.name);
+
+            if (saved && saved === radio.value) {
+                radio.checked = true;
+
+                const id = radio.name.split("_")[1];
+                const span = document.getElementById("emoji_" + id);
+                if (span) span.textContent = emojis[saved];
+            }
+        });
+
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitud de cambio de estado</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Profesional · Solicitud de estado</div>
+
+    <div class="box">
+
+        <h2 class="admin-title">Solicitar cambio de estado</h2>
+        <p class="admin-subtitle">
+            Tu estado actual es
+            <strong th:text="${usuario.estado}"></strong>.
+            Selecciona el estado que quieres solicitar. Un moderador revisará tu solicitud.
+        </p>
+
+        <form th:action="@{/profesional/solicitud}" method="post">
+
+            <div class="form-group">
+                <label>Estado solicitado</label>
+                <select name="estadoSolicitado">
+                    <option th:each="e : ${T(uts.corte3.entidades.Estado).values()}"
+                            th:value="${e}"
+                            th:text="${e}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/profesional}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Enviar solicitud</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

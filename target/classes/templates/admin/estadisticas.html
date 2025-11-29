@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas STAI</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-header">
+        <div>
+            <div class="admin-breadcrumb">Administración · STAI</div>
+            <h2 class="admin-title">Estadísticas STAI</h2>
+            <p class="admin-subtitle">Resumen de resultados globales del test STAI en la plataforma.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/admin}" class="btn">Volver al panel</a>
+        </div>
+    </div>
+
+    <nav>
+        <a th:href="@{/admin/usuarios}">Usuarios</a> |
+        <a th:href="@{/admin/stai/preguntas}">Preguntas STAI</a>
+    </nav>
+
+    <div class="admin-grid" style="margin-top: 20px;">
+
+        <div class="admin-card">
+            <h3>Resumen general</h3>
+            <p>Total de tests realizados y usuarios que han respondido al menos una vez.</p>
+            <ul>
+                <li><strong>Total de tests realizados:</strong> <span th:text="${totalTests}"></span></li>
+                <li><strong>Usuarios únicos que han respondido:</strong> <span th:text="${usuariosUnicos}"></span></li>
+            </ul>
+        </div>
+
+        <div class="admin-card">
+            <h3>Puntajes de Ansiedad-Estado</h3>
+            <p>Distribución general de los puntajes de la escala de Estado.</p>
+            <ul>
+                <li><strong>Promedio:</strong> <span th:text="${#numbers.formatDecimal(promEstado, 1, 2)}"></span></li>
+                <li><strong>Mínimo:</strong> <span th:text="${minEstado}"></span></li>
+                <li><strong>Máximo:</strong> <span th:text="${maxEstado}"></span></li>
+            </ul>
+        </div>
+
+        <div class="admin-card">
+            <h3>Puntajes de Ansiedad-Rasgo</h3>
+            <p>Distribución general de los puntajes de la escala de Rasgo.</p>
+            <ul>
+                <li><strong>Promedio:</strong> <span th:text="${#numbers.formatDecimal(promRasgo, 1, 2)}"></span></li>
+                <li><strong>Mínimo:</strong> <span th:text="${minRasgo}"></span></li>
+                <li><strong>Máximo:</strong> <span th:text="${maxRasgo}"></span></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="stats-section">
+        <h3>Tests realizados por usuario</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Número de tests</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${conteoPorUsuario}">
+                <td th:text="${entry.key}"></td>
+                <td th:text="${entry.value}"></td>
+            </tr>
+            <tr th:if="${#maps.isEmpty(conteoPorUsuario)}">
+                <td colspan="2">Todavía no hay resultados.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="stats-section">
+        <h3>Últimos resultados registrados</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Puntaje Estado</th>
+                <th>Puntaje Rasgo</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${ultimos}">
+                <td th:text="${#temporals.format(r.fecha, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${r.username}"></td>
+                <td th:text="${r.puntajeEstado}"></td>
+                <td th:text="${r.puntajeRasgo}"></td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(ultimos)}">
+                <td colspan="4">Todavía no hay resultados registrados.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

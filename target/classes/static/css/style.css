@@ -1,0 +1,537 @@
+body {
+    background: #1b1b1f;
+    color: #e7e7e7;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.box,
+.card {
+    background: #24242a;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+    border: 1px solid #333;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #1c1c22;
+    color: #eee;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #6f86ff;
+}
+
+button,
+.btn {
+    background: #4a68ff;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover,
+.btn:hover {
+    background: #6f86ff;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: #ff4e4e;
+}
+
+.btn-danger:hover {
+    background: #ff6b6b;
+}
+
+.btn-success {
+    background: #28c76f;
+}
+
+.btn-success:hover {
+    background: #43d68d;
+}
+
+.msg {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.msg-error {
+    color: #ff7777;
+}
+
+.msg-success {
+    color: #77ff77;
+}
+
+nav a {
+    color: #6f86ff;
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th,
+table td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background: #2c2c32;
+}
+
+table tr:nth-child(even) {
+    background: #222228;
+}
+
+.opcion-stai label {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+hr {
+    border: none;
+    border-bottom: 1px solid #333;
+    margin: 15px 0;
+}
+
+.layout-center {
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.admin-title {
+    font-size: 26px;
+    margin: 0;
+    position: relative;
+}
+
+.admin-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4a68ff, #7b5cff);
+    margin-top: 4px;
+    border-radius: 10px;
+}
+
+.admin-subtitle {
+    font-size: 14px;
+    color: #b0b0b7;
+    margin-top: 5px;
+}
+
+.admin-header-right a {
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #333341;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.admin-card {
+    background: #24242a;
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid #333;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.admin-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.admin-card p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #c4c4cc;
+}
+
+.admin-card .btn {
+    margin-top: 6px;
+}
+
+.admin-breadcrumb {
+    font-size: 13px;
+    color: #9a9aa4;
+    margin-bottom: 8px;
+}
+
+.admin-card-actions {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.admin-card-actions .btn {
+    margin-left: 12px;
+}
+
+.stats-section {
+    margin-top: 30px;
+}
+
+.form-box {
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.form-group-inline {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 12px;
+}
+
+.form-actions {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.form-actions a {
+    font-size: 14px;
+}
+
+.table-buttons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.box label,
+.card label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #d0d0d5;
+}
+
+.box input,
+.box select,
+.box textarea,
+.card input,
+.card select,
+.card textarea {
+    margin-bottom: 14px;
+    margin-top: 5px;
+}
+
+.box input,
+.box select,
+.box textarea {
+    background: #1c1c22 !important;
+    color: #eee !important;
+    border: 1px solid #444 !important;
+    width: 100% !important;
+    padding: 10px;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.box input:focus,
+.box select:focus,
+.box textarea:focus {
+    border-color: #6f86ff !important;
+    outline: none !important;
+    transform: scale(1.01);
+    transition: 0.2s ease;
+}
+
+.filter-box {
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 18px 22px !important;
+    border-radius: 10px;
+}
+
+.filter-box .form-group {
+    margin-bottom: 10px;
+}
+
+.filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.page-footer {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.page-footer a {
+    color: #6f86ff;
+    text-decoration: none;
+}
+
+.page-footer a:hover {
+    text-decoration: underline;
+}
+
+.user-panel-actions a {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.user-panel-card {
+    max-width: 650px;
+    margin: 25px auto 0 auto;
+    padding: 22px 28px;
+    position: relative;
+}
+
+.user-panel-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+}
+
+.user-panel-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #c4c4cc;
+}
+
+.user-actions {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-full {
+    width: 100%;
+    text-align: center;
+}
+
+.user-panel-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(90deg, #4a68ff, #7b5cff);
+}
+
+.user-panel-subtitle {
+    margin-bottom: 18px;
+}
+
+.user-action-test::before,
+.user-action-history::before,
+.user-action-logout::before {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.user-action-test::before {
+    content: "🧪";
+}
+
+.user-action-history::before {
+    content: "📊";
+}
+
+.user-action-logout::before {
+    content: "🚪";
+}
+
+.box {
+    transition: all 0.25s ease-in-out;
+}
+
+.box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.45);
+}
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-box {
+    max-width: 420px;
+    width: 100%;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.auth-logo {
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9a9af5;
+    text-align: center;
+    margin: 0 0 4px 0;
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.auth-subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #b0b0b7;
+    margin-bottom: 18px;
+}
+
+.auth-form {
+    margin-top: 10px;
+}
+
+.auth-divider {
+    margin: 18px auto 14px auto;
+    height: 1px;
+    width: 100%;
+    background: #333;
+}
+
+.auth-extra {
+    text-align: center;
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.auth-extra p {
+    margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-extra .btn-full {
+    width: 85%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    border-radius: 8px;
+}
+/* Fix para tablas dentro de box */
+.box.table-box {
+    max-width: 1000px !important;
+    padding: 30px 35px;
+}
+
+.box.table-box table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1f1f24;
+    border-radius: 10px;
+    overflow: hidden;
+    display: table;
+}
+
+.box.table-box th,
+.box.table-box td {
+    border: 1px solid #333;
+    padding: 12px 10px;
+    white-space: nowrap;
+}
+
+.box.table-box tr:nth-child(even) {
+    background: #222228;
+}
+
+.box.table-box tr:hover {
+    background: #2a2a2f;
+}
+
+/* Scroll horizontal solo si la tabla es muy grande */
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial STAI · Evaluador</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<div class="layout-center">
+
+	    <div class="admin-breadcrumb">Evaluador · Historial STAI</div>
+
+	    <div class="table-scroll">
+
+	        <h2 class="admin-title" th:text="'Historial STAI de ' + ${miembro.nombre} + ' ' + ${miembro.apellido}"></h2>
+
+	        <p class="admin-subtitle">Resultados registrados y acceso a interpretación profesional.</p>
+
+	        <div class="table-container">
+	            <table>
+	                <thead>
+	                    <tr>
+	                        <th>Fecha</th>
+	                        <th>Puntaje Estado</th>
+	                        <th>Puntaje Rasgo</th>
+	                        <th>Solicitud</th>
+	                        <th>Acciones</th>
+	                    </tr>
+	                </thead>
+
+	                <tbody>
+	                    <tr th:each="r : ${resultados}">
+	                        <td th:text="${#temporals.format(r.fecha, 'yyyy-MM-dd HH:mm')}"></td>
+	                        <td th:text="${r.puntajeEstado}"></td>
+	                        <td th:text="${r.puntajeRasgo}"></td>
+	                        <td th:text="${r.estadoSolicitudInterpretacion}"></td>
+	                        <td>
+	                            <a th:href="@{/evaluador/resultados/{id}/interpretar(id=${r.id})}" class="btn btn-sm">Interpretar</a>
+	                        </td>
+	                    </tr>
+
+	                    <tr th:if="${#lists.isEmpty(resultados)}">
+	                        <td colspan="5" style="text-align:center;padding:18px;color:#bbb;">
+	                            Este miembro aún no tiene resultados del test STAI.
+	                        </td>
+	                    </tr>
+	                </tbody>
+	            </table>
+	        </div>
+
+	        <div class="form-actions" style="justify-content:flex-start;">
+	            <a th:href="@{/evaluador/miembros}" class="btn">← Volver</a>
+	        </div>
+
+	    </div>
+	</div>
+</body>
+</html>

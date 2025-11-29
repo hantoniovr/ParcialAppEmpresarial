@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Preguntas STAI</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-header">
+        <div>
+            <div class="admin-breadcrumb">Administración · STAI</div>
+            <h2 class="admin-title">Preguntas STAI</h2>
+            <p class="admin-subtitle">Gestiona el texto, orden, dimensión y estado de cada una de las 40 preguntas del test STAI.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/admin/stai/preguntas/nueva}" class="btn btn-success">Nueva pregunta</a>
+        </div>
+    </div>
+
+    <nav>
+        <a th:href="@{/admin}">Panel admin</a>
+    </nav>
+
+    <div style="margin-top: 20px;">
+        <table>
+            <thead>
+            <tr>
+                <th>Orden</th>
+                <th>Texto</th>
+                <th>Dimensión</th>
+                <th>Invertida</th>
+                <th>Activa</th>
+                <th>Reordenar</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="p, iter : ${preguntas}">
+                <td th:text="${p.orden}"></td>
+                <td th:text="${p.texto}"></td>
+                <td th:text="${p.dimension}"></td>
+                <td th:text="${p.invertida ? 'Sí' : 'No'}"></td>
+                <td th:text="${p.activa ? 'Sí' : 'No'}"></td>
+
+                <td>
+                    <form th:action="@{/admin/stai/preguntas/{id}/subir(id=${p.id})}" method="post" style="display:inline">
+                        <button type="submit" class="btn" style="padding:4px 10px;font-size:12px;" th:disabled="${iter.first}">↑</button>
+                    </form>
+
+                    <form th:action="@{/admin/stai/preguntas/{id}/bajar(id=${p.id})}" method="post" style="display:inline">
+                        <button type="submit" class="btn" style="padding:4px 10px;font-size:12px;margin-left:4px;" th:disabled="${iter.last}">↓</button>
+                    </form>
+                </td>
+
+                <td>
+                    <div class="table-buttons">
+                        <a th:href="@{/admin/stai/preguntas/{id}/editar(id=${p.id})}" class="btn" style="padding:4px 12px;font-size:12px;">Editar</a>
+
+                        <form th:action="@{/admin/stai/preguntas/{id}/eliminar(id=${p.id})}" method="post">
+                            <button type="submit" class="btn btn-danger" style="padding:4px 12px;font-size:12px;" onclick="return confirm('¿Eliminar la pregunta seleccionada?')">Eliminar</button>
+                        </form>
+                    </div>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

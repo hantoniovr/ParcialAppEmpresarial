@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profesionales</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Moderador · Profesionales</div>
+
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Listado de profesionales</h2>
+            <p class="admin-subtitle">
+                Visualiza los profesionales registrados y ajusta su estado y validación.
+            </p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/moderador/solicitudes}" class="btn">Ver solicitudes</a>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>Estado</th>
+                <th>Validación</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${profesionales}">
+                <td th:text="${u.nombre + ' ' + u.apellido}"></td>
+                <td th:text="${u.correo}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.estado}"></td>
+                <td th:text="${u.validacion}"></td>
+                <td>
+                    <a th:href="@{/moderador/profesionales/{id}/editar(id=${u.id})}"
+                       class="btn btn-sm">Editar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(profesionales)}">
+                <td colspan="6">No hay profesionales registrados.</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-footer">
+        
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Profesional</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Profesional · Registro</div>
+    <h2 class="admin-title">Crear cuenta profesional</h2>
+    <p class="admin-subtitle">
+        Registra tus datos para acceder como profesional. Tu cuenta quedará en estado
+        <strong>PENDIENTE</strong> de validación por un moderador.
+    </p>
+
+    <div class="box">
+
+        <form th:action="@{/registro/profesional}"
+              method="post"
+              th:object="${usuario}">
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input th:field="*{nombre}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Apellido</label>
+                <input th:field="*{apellido}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="number" th:field="*{edad}" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" th:field="*{correo}" required>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input th:field="*{username}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" th:field="*{passwordHash}" required>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/login}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Registrarme</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

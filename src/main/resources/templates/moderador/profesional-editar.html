@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar profesional</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Moderador · Profesionales</div>
+    <h2 class="admin-title">Editar profesional</h2>
+    <p class="admin-subtitle">
+        Solo puedes modificar el <strong>estado</strong> y la <strong>validación</strong>.
+        El resto de datos son solo de lectura.
+    </p>
+
+    <div class="box">
+
+        <form th:action="@{/moderador/profesionales/{id}/editar(id=${usuario.id})}"
+              method="post"
+              th:object="${usuario}">
+
+            <!-- Datos solo lectura -->
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input th:value="${usuario.nombre + ' ' + usuario.apellido}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input th:value="${usuario.correo}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input th:value="${usuario.username}" disabled>
+            </div>
+
+            <hr>
+
+            <!-- Campos editables -->
+            <div class="form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option th:each="e : ${estados}" th:value="${e}" th:text="${e}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Validación</label>
+                <select th:field="*{validacion}">
+                    <option th:each="v : ${validaciones}" th:value="${v}" th:text="${v}"></option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/moderador/profesionales}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

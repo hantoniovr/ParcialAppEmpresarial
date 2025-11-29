@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes de interpretación</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Evaluador · Solicitudes</div>
+
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Solicitudes de interpretación pendientes</h2>
+            <p class="admin-subtitle">Resultados que los usuarios han marcado para interpretación.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/evaluador/miembros}" class="btn">Ver miembros</a>
+        </div>
+    </div>
+
+    <table style="margin-top:20px;">
+        <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Puntaje Estado</th>
+            <th>Puntaje Rasgo</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="r : ${pendientes}">
+            <td th:text="${r.username}"></td>
+            <td th:text="${#temporals.format(r.fecha, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${r.puntajeEstado}"></td>
+            <td th:text="${r.puntajeRasgo}"></td>
+            <td>
+                <a th:href="@{/evaluador/solicitudes/{id}/atender(id=${r.id})}" class="btn btn-sm">Atender</a>
+            </td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(pendientes)}">
+            <td colspan="5">No hay solicitudes pendientes.</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

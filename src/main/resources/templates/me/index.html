@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Panel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .user-panel-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #24242a;
+            border-radius: 12px;
+            border: 1px solid #333;
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .user-btn {
+            width: 85%;
+            padding: 14px 18px;
+            font-size: 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin: 10px auto;
+        }
+        .user-btn svg { width: 20px; height: 20px; }
+        .user-divider {
+            margin: 18px auto;
+            width: 85%;
+            border-bottom: 1px solid #3a3a42;
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Usuario · Panel</div>
+
+    <h2 class="admin-title" th:text="'Bienvenido/a, ' + ${username} + '!'"></h2>
+    <p class="admin-subtitle">Este es tu panel de usuario. Elige qué deseas hacer:</p>
+
+    <div class="user-panel-card">
+
+        <a th:href="@{/test/stai}" class="btn user-btn">
+            <svg fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 
+                7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a1 1 0 00-1.41 
+                0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+            </svg>
+            Realizar Test STAI
+        </a>
+
+        <a th:href="@{/me/stai}" class="btn user-btn">
+            <svg fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M18 2H6a2 2 0 00-2 2v16a1 1 0 001.45.89L12 
+                18.12l6.55 2.77A1 1 0 0020 20V4a2 2 0 00-2-2z"/>
+            </svg>
+            Ver historial de resultados
+        </a>
+
+        <div class="user-divider"></div>
+
+        <a th:href="@{/logout}" class="btn btn-danger user-btn">
+            <svg fill="#ffffff" viewBox="0 0 24 24">
+                <path d="M10 17l5-5-5-5v10zm9-12h-8V3h8c1.1 0 2 
+                .9 2 2v14a2 2 0 01-2 2h-8v-2h8V5z"/>
+            </svg>
+            Cerrar sesión
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

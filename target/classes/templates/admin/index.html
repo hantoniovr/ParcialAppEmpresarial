@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-header">
+        <div>
+            <div class="admin-breadcrumb">Administración · STAI</div>
+            <h2 class="admin-title">Panel de administración</h2>
+            <p class="admin-subtitle">Gestiona usuarios, el cuestionario STAI y revisa estadísticas de resultados.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/logout}" class="btn">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <div class="admin-grid">
+
+        <div class="admin-card">
+            <div>
+                <h3>Usuarios</h3>
+                <p>Consulta, filtra, edita y elimina los usuarios registrados en el sistema.</p>
+            </div>
+            <div class="admin-card-actions">
+                <a th:href="@{/admin/usuarios}" class="btn">Ver usuarios</a>
+                <a th:href="@{/admin/usuarios/nuevo}" class="btn btn-success">Registrar usuario</a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div>
+                <h3>Cuestionario STAI</h3>
+                <p>Administra las 40 preguntas del test STAI: texto, orden e inversión.</p>
+            </div>
+            <div>
+                <a th:href="@{/admin/stai/preguntas}" class="btn">Gestionar preguntas</a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div>
+                <h3>Probar Test STAI</h3>
+                <p>Accede al test tal y como lo ve un usuario para validar la experiencia.</p>
+            </div>
+            <div>
+                <a th:href="@{/test/stai}" class="btn">Abrir test</a>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <div>
+                <h3>Estadísticas</h3>
+                <p>Visualiza promedios, rangos y distribución de resultados STAI.</p>
+            </div>
+            <div>
+                <a th:href="@{/admin/estadisticas}" class="btn">Ver estadísticas</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial STAI</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Usuario · Historial STAI</div>
+
+    <h2 class="admin-title" th:text="'Historial de resultados de ' + ${username}"></h2>
+    <p class="admin-subtitle">Aquí puedes ver todas tus evaluaciones previas del test STAI.</p>
+
+    <p class="msg-success" th:if="${solicitudMensaje}" th:text="${solicitudMensaje}"></p>
+
+    <div class="box" style="max-width:900px;margin-top:30px;">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Puntaje Estado</th>
+                <th>Puntaje Rasgo</th>
+                <th>Solicitud</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="r : ${resultados}">
+                <td th:text="${#temporals.format(r.fecha, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${r.puntajeEstado}"></td>
+                <td th:text="${r.puntajeRasgo}"></td>
+
+                <td>
+                    <span th:switch="${r.estadoSolicitudInterpretacion != null ? r.estadoSolicitudInterpretacion.name() : 'NO_REALIZADA'}">
+                        <span th:case="'PENDIENTE'">PENDIENTE</span>
+                        <span th:case="'COMPLETADA'">COMPLETADA</span>
+                        <span th:case="*">NO REALIZADA</span>
+                    </span>
+                </td>
+
+                <td>
+                    <a th:href="@{/me/stai/{id}(id=${r.id})}" class="btn btn-sm">Detalles</a>
+
+                    <span th:if="${r.interpretacion != null and !#strings.isEmpty(r.interpretacion)}">
+                        | Interpretación lista
+                    </span>
+
+                    <form th:if="${r.interpretacion == null
+                               and (r.estadoSolicitudInterpretacion == null
+                                    or r.estadoSolicitudInterpretacion.name() == 'NO_REALIZADA')}"
+                          th:action="@{/me/stai/{id}/solicitar(id=${r.id})}"
+                          method="post"
+                          style="display:inline;">
+                        | <button type="submit" class="btn btn-sm">Solicitar interpretación</button>
+                    </form>
+
+                    <span th:if="${r.estadoSolicitudInterpretacion != null
+                               and r.estadoSolicitudInterpretacion.name() == 'PENDIENTE'}">
+                        | Solicitud enviada
+                    </span>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(resultados)}">
+                <td colspan="5" style="text-align:center;padding:18px;color:#bbb;">
+                    Aún no has completado el test STAI.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-actions" style="margin-top:20px;">
+        <a th:href="@{/test/stai}" class="btn">Realizar test STAI</a>
+        <a th:href="@{/me}" class="btn">Volver a mi panel</a>
+    </div>
+
+</div>
+
+</body>
+</html>

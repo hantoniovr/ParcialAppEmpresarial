@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Administración · Usuarios</div>
+
+    <div class="admin-header">
+        <div>
+            <h2 class="admin-title">Usuarios</h2>
+            <p class="admin-subtitle">Consulta, filtra y administra los usuarios registrados en el sistema.</p>
+        </div>
+        <div class="admin-header-right">
+            <a th:href="@{/admin/usuarios/nuevo}" class="btn btn-success">Nuevo usuario</a>
+        </div>
+    </div>
+
+    <div class="box filter-box">
+        <form th:action="@{/admin/usuarios}" method="get">
+
+            <div class="form-group">
+                <label>Tipo</label>
+                <select name="tipo">
+                    <option value="">(todos)</option>
+                    <option th:each="t : ${tipos}" th:value="${t}" th:text="${t}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input name="correo">
+            </div>
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input name="username">
+            </div>
+
+            <div class="filter-actions">
+                <button type="submit" class="btn">Filtrar</button>
+                <a th:href="@{/admin/usuarios}" class="btn btn-danger">Limpiar</a>
+            </div>
+        </form>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <table>
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Validación</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.nombre + ' ' + u.apellido}"></td>
+                <td th:text="${u.correo}"></td>
+                <td th:text="${u.username}"></td>
+                <td th:text="${u.tipoUsuario}"></td>
+                <td th:text="${u.estado}"></td>
+                <td th:text="${u.validacion}"></td>
+                <td>
+                    <div class="table-buttons">
+                        <a th:href="@{/admin/usuarios/{id}/editar(id=${u.id})}" class="btn btn-sm">Editar</a>
+
+                        <form th:action="@{/admin/usuarios/{id}/eliminar(id=${u.id})}" method="post">
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm"
+                                    onclick="return confirm('¿Eliminar este usuario?')">
+                                Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(usuarios)}">
+                <td colspan="7">No hay usuarios que coincidan con el filtro.</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-footer">
+        <a th:href="@{/admin}">Volver al panel</a> |
+        <a th:href="@{/logout}">Logout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

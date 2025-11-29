@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Interpretar resultado STAI</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Evaluador · Interpretación</div>
+
+    <div class="box">
+
+        <h2 class="admin-title">Interpretar resultado STAI</h2>
+        <p class="admin-subtitle">Revisa los puntajes y registra tu interpretación profesional.</p>
+
+        <p><strong>Usuario:</strong> <span th:text="${resultado.username}"></span></p>
+        <p><strong>Fecha:</strong> <span th:text="${#temporals.format(resultado.fecha, 'yyyy-MM-dd HH:mm')}"></span></p>
+        <p><strong>Puntaje Estado:</strong> <span th:text="${resultado.puntajeEstado}"></span></p>
+        <p><strong>Puntaje Rasgo:</strong> <span th:text="${resultado.puntajeRasgo}"></span></p>
+
+        <form th:action="@{/evaluador/resultados/{id}/interpretar(id=${resultado.id})}" method="post">
+
+            <div class="form-group">
+                <label>Interpretación</label>
+                <textarea name="interpretacion" rows="6" th:text="${resultado.interpretacion}" style="width:100%;resize:vertical;"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success">Guardar interpretación</button>
+                <a th:href="@{/evaluador/miembros}" class="btn btn-danger">Cancelar</a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

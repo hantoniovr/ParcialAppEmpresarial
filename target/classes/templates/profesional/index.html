@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Profesional</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="layout-center">
+
+    <div class="admin-breadcrumb">Profesional · Panel</div>
+
+    <h2 class="admin-title" th:text="'Bienvenido/a, ' + ${usuario.nombre} + ' ' + ${usuario.apellido} + '!'"></h2>
+    <p class="admin-subtitle">Desde este panel puedes gestionar tus datos y solicitar cambios de estado.</p>
+
+    <div class="user-panel-card">
+
+        <p class="user-panel-subtitle">
+            <strong>Tipo de usuario:</strong>
+            <span th:text="${usuario.tipoUsuario}"></span><br>
+            <strong>Estado:</strong>
+            <span th:text="${usuario.estado}"></span><br>
+            <strong>Validación:</strong>
+            <span th:text="${usuario.validacion}"></span>
+        </p>
+
+        <div class="user-actions">
+            <a th:href="@{/profesional/editar}" class="btn btn-full user-action-test">
+                Editar mis datos
+            </a>
+
+            <a th:href="@{/profesional/solicitud}" class="btn btn-full user-action-history">
+                Enviar solicitud de cambio de estado
+            </a>
+
+            <a th:href="@{/logout}" class="btn btn-danger btn-full user-action-logout">
+                Cerrar sesión
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
